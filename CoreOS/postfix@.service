@@ -1,5 +1,11 @@
 [Unit]
 Description=Postfix Service
+Requires=etcd.service
+Requires=docker.service
+
+After=etcd.service
+After=docker.service
+Before=apache-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
