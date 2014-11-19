@@ -1,14 +1,5 @@
-# This service file is built for a system that uses Apache, but SSH is the monitored process.
-
 [Unit]
-Description=Apache web server service
-Requires=etcd.service
-Requires=docker.service
-Requires=mysqld.service
-
-After=etcd.service
-After=docker.service
-After=mysqld.service
+Description=Postfix Service
 
 [Service]
 TimeoutStartSec=0
