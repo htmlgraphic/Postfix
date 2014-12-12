@@ -4,6 +4,8 @@ machine:
 dependencies:
   override:
     - docker build -t mysql-5.5 Docker/MySQL/5.5/
+    - docker build -t postfix Docker/Postfix
+    - docker build -t apache Docker/Apache/
 test:
   override:
     # test mysql 5.5
@@ -15,3 +17,8 @@ test:
     - docker logs mysql55master | grep "repl:repl"
     - mysql -uuser -ptest -h127.0.0.1 -P13308 -e "show master status\G;" | grep "mysql-bin.*"
     - mysql -uuser -ptest -h127.0.0.1 -P13309 -e "show slave status\G;" | grep "Slave_IO_Running.*Yes"
+    # test apache
+    - docker run -d -p 80:80 -p 443:443 -p 5422:22 apache; sleep 20
+    # test postfix
+    - docker run -d -p 25:25 -e USER=postfix -e PASS=test -e HOSTNAME=post-office.htmlgraphic.com postfix; sleep 20
+    - docker logs postfix | grep "postfix:test"

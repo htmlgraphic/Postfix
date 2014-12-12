@@ -33,6 +33,15 @@ cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
 [[ -z $(find /usr/sbin/ -name postqueue -o -name postdrop -perm -2555) ]] && \
     chmod g+s /usr/sbin/post{drop,queue}
 
+
+    echo "========================================================================"
+    echo "This Postfix build will send out emails via the following credentials:"
+    echo ""
+    echo "    user: $USER pass: $PASS"
+    echo ""
+    echo "========================================================================"
+
+
 # Spin everything up
 #
 /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf
