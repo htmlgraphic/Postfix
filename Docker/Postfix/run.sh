@@ -3,12 +3,7 @@
 
 StartMySQL ()
 {
-    echo "========================================================================"
-    echo "This Postfix build will send out emails via the following credentials:"
-    echo ""
-    echo "    user: $USER pass: $PASS"
-    echo ""
-    echo "========================================================================"
+    echo "=> Adding the following credentials $USER:$PASS"
 }
 
 
