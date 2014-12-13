@@ -19,7 +19,7 @@ test:
     - mysql -uuser -ptest -h127.0.0.1 -P13308 -e "show master status\G;" | grep "mysql-bin.*"
     - mysql -uuser -ptest -h127.0.0.1 -P13309 -e "show slave status\G;" | grep "Slave_IO_Running.*Yes"
     # test apache
-    - docker run -d -p 80:80 -p 443:443 -p 5422:22 apache; sleep 20
+    - docker run -d -p 80:80 -p 443:443 apache; sleep 20
     # test data container
     - docker run --privileged -d -p 5422:22 --name data -e HOSTNAME=data.htmlgraphic.com data; sleep 20 
     # test postfix
