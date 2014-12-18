@@ -1,12 +1,19 @@
 language: python
 
-build_image: htmlgraphic/base
+build_image: htmlgraphic/postfix
 
 
 script:
- - echo "hello world"
- 
+- ./posfix/check_postfix.sh
+
 notifications:
   email:
+    recipients:
+      - jason@htmlgraphic.com
     on_success: change
     on_failure: always
+
+branches:
+  only:
+  - master
+  - develop
