@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-echo 10.132.188.119 mysql >> /etc/hosts
-
 # Group perimission tweak for local development
 groupdel staff
 groupmod -g 50 www-data
