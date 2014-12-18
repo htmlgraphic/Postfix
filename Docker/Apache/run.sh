@@ -6,6 +6,7 @@ echo 10.132.188.119 mysql >> /etc/hosts
 # Group perimission tweak for local development
 groupdel staff
 groupmod -g 50 www-data
+usermod -s /bin/false -u 1000 nobody
 
 # Apache should be able to write to the /tmp directory
 chown nobody:www-data /tmp
