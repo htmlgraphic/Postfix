@@ -2,9 +2,14 @@ language: python
 
 build_image: htmlgraphic/postfix
 
+env:
+  - USER=p0$tf1x PASS=p@ssw0Rd
+
 script:
   - /usr/sbin/postconf -n
   - bash Docker/Postfix/build_tests.sh
+
+cache: true
 
 notifications:
   email:
