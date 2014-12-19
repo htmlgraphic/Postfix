@@ -7,9 +7,13 @@ before_script:
   - cd $PWD && curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
   - git clone https://github.com/htmlgraphic/Docker.git build-test
   - cd build-test && git checkout develop && chmod +x Docker/Postfix/build_tests.sh
+  - echo $PWD
   - ls -la
 
 script:
+  - echo $PWD
+  - cd $PWD
+  - ls -la
   - bash $PWD/build-test/Docker/Postfix/build_tests.sh
 
 notifications:
