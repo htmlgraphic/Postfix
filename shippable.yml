@@ -10,7 +10,7 @@ before_script:
   - chmod +x Docker/Postfix/build_tests.sh
 
 script:
-  - $PWD/build-test/Docker/Postfix/build_tests.sh
+  - bash build-test/Docker/Postfix/build_tests.sh
 
 notifications:
   email:
