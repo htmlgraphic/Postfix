@@ -5,12 +5,12 @@ build_image: htmlgraphic/postfix
 
 before_script:
   - cd $PWD && curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
-  - cd $PWD git clone https://github.com/htmlgraphic/Docker.git build-test
-  - cd $PWD/build-test && git checkout develop && chmod +x Docker/Postfix/build_tests.sh
+  - cd git clone https://github.com/htmlgraphic/Docker.git build-test
+  - cd build-test && git checkout develop && chmod +x Docker/Postfix/build_tests.sh
   - ls -la
 
 script:
-  - $PWD/build-test/Docker/Postfix/build_tests.sh
+  - bash $PWD/build-test/Docker/Postfix/build_tests.sh
 
 notifications:
   email:
