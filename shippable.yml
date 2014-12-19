@@ -4,7 +4,7 @@ build_image: htmlgraphic/postfix
 
 
 script:
-- ./posfix/check_postfix.sh
+  - ./posfix/check_postfix.sh
 
 notifications:
   email:
