@@ -2,11 +2,6 @@ language: python
 
 build_image: htmlgraphic/postfix
 
-
-before_script:
-  - cd Docker && curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
-  - ls -la
-
 script:
   - bash Docker/Postfix/build_tests.sh
 
