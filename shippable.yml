@@ -3,6 +3,9 @@ language: python
 build_image: htmlgraphic/postfix
 
 
+before_script:
+  - curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
+
 script:
   - ./posfix/check_postfix.sh
 
