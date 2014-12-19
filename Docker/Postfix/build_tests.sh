@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
+
 testPostfixUsername()
 {
     echo 'Testing Postfix username.'
@@ -51,4 +53,4 @@ testPostfixMyNetworks3()
 }
 
 
-. $PWD/shunit2-2.1.6/src/shunit2
+. shunit2-2.1.6/src/shunit2
