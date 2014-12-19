@@ -51,4 +51,4 @@ testPostfixMyNetworks3()
 }
 
 
-. shunit2-2.1.6/src/shunit2
+. $PWD/shunit2-2.1.6/src/shunit2
