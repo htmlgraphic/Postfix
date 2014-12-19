@@ -3,6 +3,7 @@ language: python
 build_image: htmlgraphic/postfix
 
 script:
+  - echo postconf -n
   - bash Docker/Postfix/build_tests.sh
 
 notifications:
