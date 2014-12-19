@@ -3,7 +3,7 @@ language: python
 build_image: htmlgraphic/postfix
 
 env:
-  - USER=p0$tf1x PASS=p@ssw0Rd
+  - USER=p08tf1X PASS=p@ssw0Rd
 
 script:
   - bash Docker/Postfix/run.sh &

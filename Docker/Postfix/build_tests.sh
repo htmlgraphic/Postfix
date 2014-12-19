@@ -5,7 +5,7 @@ curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
 testPostfixUsername()
 {
     echo 'Testing Postfix username.'
-    test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep 'p0$tf1x' | wc -l)
+    test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep 'p08tf1X' | wc -l)
     assertEquals $test 1
 }
 
