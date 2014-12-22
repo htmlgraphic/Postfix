@@ -3,7 +3,7 @@ machine:
     - docker
 dependencies:
   override:
-    - docker build -t postfix Docker/Postfix/
+    - docker build -t postfix .
 test:
   override:
     # test postfix

@@ -6,10 +6,10 @@ env:
   - USER=p08tf1X PASS=p@ssw0Rd
 
 script:
-  - bash Docker/Postfix/run.sh &
+  - bash run.sh &
   - sleep 20
   - /usr/sbin/postconf -n
-  - bash Docker/Postfix/build_tests.sh
+  - bash build_tests.sh
 
 cache: true
 
