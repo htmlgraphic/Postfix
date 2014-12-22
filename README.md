@@ -1,50 +1,14 @@
-[![Docker Build Status](https://circleci.com/gh/htmlgraphic/Docker/tree/develop.svg?style=svg&circle-token=b51ac0eded585009395fde219719b0c86f5320d2)](https://circleci.com/gh/htmlgraphic/Docker/tree/master)
+[![Build Status](https://api.shippable.com/projects/54986113d46935d5fbc0d2ec/badge?branchName=master)](https://app.shippable.com/projects/54986113d46935d5fbc0d2ec/builds/latest)
 
-[![Build Status](https://api.shippable.com/projects/548b5d23d46935d5fbc01275/badge?branchName=master)](https://app.shippable.com/projects/548b5d23d46935d5fbc01275/builds/latest)
+##Postfix Docker
 
-OPS is a collection of CoreOS and Docker files to simplify the deployment of multiple web services on Digital Ocean. The docker build processes can be used on any provider. Each component is divided into the following folders:
+Postfix is a very nice mail courier service, I enjoy using. This repo will give you a turn key, fully functional build of a Docker container for use in production.
 
-* [**CoreOS**](https://github.com/htmlgraphic/CoreOS) - Scripts used for the loading of services into Fleet on CoreOS
-* [**Docker**](https://github.com/htmlgraphic/Docker) - Build scripts the creation of my different types of servers. 
-    * Apache Web Server
-    * Data Container
-    * Postfix Mail Server
-    * MySQL server
+This build is part of a larger set of [Dockerfiles](https://github.com/htmlgraphic/Docker) used to run services either locally within Docker or on a [CoreOS Cluster](https://github.com/htmlgraphic/coreos) managed with Fleetctl.
 
-## Creating a cluster
-Creating nodes for the CoreOS cluster is as simple as running the `CoreOS/create_node.sh` script.
-* Before running the script, be sure to set the DO_TOKEN environment variable and the SSH key ID in the script as well as the discovery ID in `cloud-config.yml`. 
-**Example:** `export DO_TOKEN=xyzabc123`
-* New discovery URLs can be generated at https://discovery.etcd.io/new.
-* Be sure not to change anything in between each time you run `create_node.sh`
+#####Test Drive Development
+Consistent testing is important when making any edits, large or small. By using test driven development you can save a great deal of time making sure no buggy code makes it into production environments. This build uses CircleCI and Shippable to test the final build.
 
-* Current variables set during box creation:
-    * name - what is the droplet called? A valid domain name is possible as Digital Ocean will add a reverse DNS lookup
-    * backup - boolean, Enable automated backups - [more info](https://www.digitalocean.com/community/tutorials/digitalocean-backups-and-snapshots-explained)
-    * region - where should this droplet be created
-    * size - 512mb, 1gb, 2gb - Issue a CURL request to understand your size options - [more info](https://developers.digitalocean.com/#list-all-sizes)
-    * private_networking - boolean
-    * image - What version of CoreOS: **coreos-stable** **coreos-beta** **coreos-alpha**
-    * user_data - this is where the cloud config comes into play
-    * ssh_keys - CoreOS only uses a key for login. You will need to add one to your DO account - [more info](https://developers.digitalocean.com/#ssh-keys) 
+**CircleCI** - Test the Dockerfile process, can the container be built the correctly? Verify the build process with a number of tests. Currently no code can be tested on the running container. Data can be echo and available grepping the output via `docker logs | grep value`
 
-## Accessing the cluster
-You may now verify that the cluster has clustered by SSHing into a node.
-* SSH into a node as the core user with the -A flag (to forward the SSH agent): `ssh -A core@<node_public_ip>`
-* On the node, run `fleetctl list-machines` to verify that the nodes have discovered each other.
-
-It may also be preferred to install fleetctl on your local machine and connect remotely:
-* Run `ssh-add` to ensure your SSH key is added to the ssh agent
-* Run `fleetctl --tunnel=<node_public_ip> list-machines`
-* You may set the `FLEETCTL_TUNNEL` environment variable to skip setting the `--tunnel` flag
-
-## Deploying apps
-It's important that the unit files (*.service) is accessible to the fleetctl command. If the files are on your local computer, use a tunneled fleetctl connection to load the unit files.
-
-* Upload the service file with `fleetctl submit name.service`
-* List unit files with `fleetctl list-unit-files`
-* Finally, start the units with `fleetctl start name.service`
-* List loaded units with `fleetctl list-units`
-
-
-
+**Shippable** - Run tests on the actual built container. These tests ensure the scripts have been setup properly and that postfix can start with parameters defined. If any test(s) fail the system should be reviewed closer.
