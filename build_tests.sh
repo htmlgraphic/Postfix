@@ -52,5 +52,14 @@ testPostfixMyNetworks3()
     assertEquals $test 1
 }
 
+testPostfixMyNetworks4()
+{
+    echo -e '\n'
+    echo 'Allow 50.28.0.151 this network to send email.'
+    test=$(/usr/sbin/postconf mynetworks | grep '50.28.0.151' | wc -l)
+    assertEquals $test 1
+}
+
+
 
 . shunit2-2.1.6/src/shunit2
