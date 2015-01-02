@@ -16,7 +16,9 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "     make build        - Build the $(NAME) image"
+	@echo "     make build        - Build image $(NAME)"
+	@echo "     make dev          - Build image $(IMAGE_NAME):dev"
+	@echo "     make push         - Push $(IMAGE_NAME) to public docker repo"
 	@echo "     make run          - Run $(NAME) container"
 	@echo "     make start        - Start the EXISTING $(NAME) container"
 	@echo "     make stop         - Stop $(NAME) container"
@@ -28,6 +30,12 @@ help:
 build:
 	@echo "Build $(NAME)..."
 	docker build -t $(IMAGE_NAME) .
+
+dev:
+	docker build --rm -t $(IMAGE_NAME):dev .
+
+push:
+	docker push $(IMAGE_NAME)
 
 run:
 	@echo "Run $(NAME)..."

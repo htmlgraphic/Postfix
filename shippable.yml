@@ -1,6 +1,6 @@
 language: python
 
-build_image: htmlgraphic/postfix
+build_image: htmlgraphic/postfix:dev
 
 env:
   - USER=p08tf1X PASS=p@ssw0Rd

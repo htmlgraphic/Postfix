@@ -2,6 +2,9 @@
 
 curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
 
+    #### Extra breathing room
+    echo -e '\n'
+
 testPostfixUsername()
 {
     echo 'Testing Postfix username.'
