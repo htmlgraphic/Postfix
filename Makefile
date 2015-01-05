@@ -25,7 +25,7 @@ help:
 	@echo "     make restart      - Stop and start $(NAME) container"
 	@echo "     make remove       - Stop and remove $(NAME) container"
 	@echo "     make state        - View state $(NAME) container"
-	@echo "     make logs         - View logs in real time"
+	@echo "     make logs         - Tail logs on running instance"
 
 build:
 	@echo "Build $(NAME)..."
