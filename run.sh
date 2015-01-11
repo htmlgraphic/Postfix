@@ -9,6 +9,14 @@ StartPostfix ()
 }
 
 
+# output logs to logentries.com
+cat <<EOF > /etc/rsyslog.d/logentries.conf
+\$template Logentries,"$LOG_TOKEN %HOSTNAME% %syslogtag%%msg%\n"
+
+*.* @@api.logentries.com:10000;Logentries
+EOF
+
+
 # myhostname should match the name that is given to the container via the 'docker run' command. 
 # This will help any internal email route proper outbound.
 postconf -e \
