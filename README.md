@@ -28,7 +28,6 @@ Consistent testing is important when making any edits, large or small. By using 
 *   **circle.yml** - Tests ran with test driven development service CircleCI
 *   **Dockerfile** - Uses a basefile build to help speed up the docker container build process
 *   **Makefile** - A helpful file used to streamline the creation of containers
-*   **postfix.sh** - Used by supervisord.conf to start Postfix
 *   **run.sh** - Setup apache, move around conf files, start process on container
 *   **preseed.txt** - Params used on initial Postfix setup
 *   **run.sh** - Setup apache, move around conf files, start process on container
