@@ -6,8 +6,6 @@ IMAGE_REPO = htmlgraphic
 IMAGE_NAME = $(IMAGE_REPO)/$(NAME)
 HOSTNAME = post-office.htmlgraphic.com
 DOMAIN = htmlgraphic.com
-USER = XXXX
-PASS = XXXX
 
 all:: help
 
@@ -39,7 +37,7 @@ push:
 
 run:
 	@echo "Run $(NAME)..."
-	docker run -d --restart=always -p 25:25 --name $(NAME) -e USER=$(USER) -e PASS=$(PASS) -e HOSTNAME=$(HOSTNAME) $(IMAGE_NAME)
+	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=$(POSTFIX_USER) -e PASS=$(POSTFIX_PASS) -e HOSTNAME=$(HOSTNAME) $(IMAGE_NAME)
 
 start:
 	@echo "Starting $(NAME)..."
