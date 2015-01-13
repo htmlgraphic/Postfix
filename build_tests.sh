@@ -64,6 +64,31 @@ testPostfixMyNetworks4()
     echo -e '\n'
 }
 
+testPostfixMyNetworks5()
+{
+    echo 'Allow 107.170.0.0/18 this network to send email.'
+    test=$(/usr/sbin/postconf mynetworks | grep '107.170.0.0/18' | wc -l)
+    assertEquals $test 1
+    echo -e '\n'
+}
+
+testPostfixMyNetworks6()
+{
+    echo 'Allow 104.131.0.0/18 this network to send email.'
+    test=$(/usr/sbin/postconf mynetworks | grep '104.131.0.0/18' | wc -l)
+    assertEquals $test 1
+    echo -e '\n'
+}
+
+
+testPostfixMyNetworks6()
+{
+    echo 'Allow 172.17.0.0/18 this network to send email.'
+    test=$(/usr/sbin/postconf mynetworks | grep '172.17.0.0/18' | wc -l)
+    assertEquals $test 1
+    echo -e '\n'
+}
+
 
 
 . shunit2-2.1.6/src/shunit2

@@ -23,7 +23,7 @@ postconf -e \
    myhostname=post-office.htmlgraphic.com \
    mydomain=htmlgraphic.com \
    mydestination="localhost.localdomain localhost" \
-   mynetworks="50.28.0.151 54.225.164.191 104.236.0.0/18 10.132.0.0/16 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128" \
+   mynetworks="172.17.0.0/18 50.28.0.151 54.225.164.191 104.131.0.0/18 107.170.0.0/18 104.236.0.0/18 10.132.0.0/16 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128" \
    smtpd_recipient_restrictions=permit_mynetworks \
    mail_spool_directory="/var/spool/mail/" \
    virtual_alias_maps=hash:/etc/postfix/virtual \
