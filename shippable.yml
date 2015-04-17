@@ -1,15 +1,15 @@
 language: python
 
-build_image: htmlgraphic/postfix:dev
+build_image: htmlgraphic/postfix
 
 env:
   - USER=p08tf1X PASS=p@ssw0Rd
 
 script:
-  - bash run.sh &
+  - bash app/run.sh &
   - sleep 20
   - /usr/sbin/postconf -n
-  - bash build_tests.sh
+  - bash tests/build_tests.sh
 
 cache: true
 
