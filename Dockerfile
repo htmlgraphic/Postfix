@@ -3,16 +3,16 @@ MAINTAINER Jason Gegere <jason@htmlgraphic.com>
 
 # Install packages then remove cache package list information
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    supervisor \
-    rsyslog \
-    postfix && apt-get clean && rm -rf /var/lib/apt/lists/*
+ supervisor \
+ rsyslog \
+ postfix && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 # POSTFIX
 
 # Copy files / scripts to build application
 ADD ./tests /opt
-ADD ./app /opt 
+ADD ./app /opt
 RUN chmod 755 /opt/* && cp /etc/hostname /etc/mailname
 
 RUN debconf-set-selections /opt/preseed.txt
