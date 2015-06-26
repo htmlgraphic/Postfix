@@ -3,6 +3,7 @@
 
 NAME = postfix
 IMAGE_REPO = htmlgraphic
+VERSION = 1.0.10
 IMAGE_NAME = $(IMAGE_REPO)/$(NAME)
 HOSTNAME = post-office.htmlgraphic.com
 DOMAIN = htmlgraphic.com
@@ -14,30 +15,26 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "     make build        - Build image $(NAME)"
-	@echo "     make dev          - Build image $(IMAGE_NAME):dev"
-	@echo "     make push         - Push $(IMAGE_NAME) to public docker repo"
-	@echo "     make run          - Run $(NAME) container"
-	@echo "     make start        - Start the EXISTING $(NAME) container"
-	@echo "     make stop         - Stop $(NAME) container"
-	@echo "     make restart      - Stop and start $(NAME) container"
-	@echo "     make remove       - Stop and remove $(NAME) container"
-	@echo "     make state        - View state $(NAME) container"
-	@echo "     make logs         - Tail logs on running instance"
+	@echo "     make build		- Build image $(NAME)"
+	@echo "     make push		- Push $(IMAGE_NAME) to public docker repo"
+	@echo "     make run		- Run $(NAME) container"
+	@echo "     make start		- Start the EXISTING $(NAME) container"
+	@echo "     make stop		- Stop $(NAME) container"
+	@echo "     make restart	- Stop and start $(NAME) container"
+	@echo "     make remove	- Stop and remove $(NAME) container"
+	@echo "     make state		- View state $(NAME) container"
+	@echo "     make logs		- Tail logs on running instance"
 
 build:
 	@echo "Build $(NAME)..."
-	docker build -t $(IMAGE_NAME) .
-
-dev:
-	docker build --rm -t $(IMAGE_NAME):dev .
+	docker build --rm --no-cache -t $(IMAGE_NAME):$(VERSION) .
 
 push:
-	docker push $(IMAGE_NAME)
+	docker push $(IMAGE_NAME):$(VERSION)
 
 run:
 	@echo "Run $(NAME)..."
-	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=$(POSTFIX_USER) -e PASS=$(POSTFIX_PASS) -e HOSTNAME=$(HOSTNAME) $(IMAGE_NAME)
+	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=$(POSTFIX_USER) -e PASS=$(POSTFIX_PASS) -e HOSTNAME=$(HOSTNAME) $(IMAGE_NAME):$(VERSION)
 
 start:
 	@echo "Starting $(NAME)..."
