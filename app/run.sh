@@ -3,7 +3,8 @@
 
 StartPostfix ()
 {
-	echo "=> Adding the following credentials $USER:$PASS"
+	echo "=> Adding environmental variables:"
+	echo "=> SMTP: $USER:$PASS"
 	echo "=> Log Key: $LOG_TOKEN"
 }
 
