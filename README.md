@@ -33,17 +33,17 @@ Consistent testing is important when making any edits, large or small. By using 
 [![Build Status](https://api.shippable.com/projects/54986113d46935d5fbc0d2ec/badge?branchName=master)](https://app.shippable.com/projects/54986113d46935d5fbc0d2ec/builds/latest)
 
 ####Postfix Container
-	* **.dockerignore** - Files that should be ignored during the build process - [best practices](https://docs.docker.com/articles/dockerfile_best-practices/#use-a-dockerignore-file)
-	* **build_tests.sh** - Tests ran with test driven development service Shippable
-	* **circle.yml** - Tests ran with test driven development service CircleCI
-	* **Dockerfile** - Uses a basefile build to help speed up the docker container build process
-	* **Makefile** - A helpful file used to streamline the creation of containers
-	* **run.sh** - Setup apache, move around conf files, start process on container
-	* **preseed.txt** - Params used on initial Postfix setup
-	* **run.sh** - Setup apache, move around conf files, start process on container
-	* **shippable.yml** - Configuration file used by Shippable to run `build_tests.sh`
-	* **supervisord.conf** - Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems
-	* **virtual** - Map `root` to an actual email
+* **.dockerignore** - Files that should be ignored during the build process - [best practices](https://docs.docker.com/articles/dockerfile_best-practices/#use-a-dockerignore-file)
+* **build_tests.sh** - Tests ran with test driven development service Shippable
+* **circle.yml** - Tests ran with test driven development service CircleCI
+* **Dockerfile** - Uses a basefile build to help speed up the docker container build process
+* **Makefile** - A helpful file used to streamline the creation of containers
+* **run.sh** - Setup apache, move around conf files, start process on container
+* **preseed.txt** - Params used on initial Postfix setup
+* **run.sh** - Setup apache, move around conf files, start process on container
+* **shippable.yml** - Configuration file used by Shippable to run `build_tests.sh`
+* **supervisord.conf** - Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems
+* **virtual** - Map `root` to an actual email
 
 ---
 
