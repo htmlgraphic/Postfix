@@ -1,4 +1,9 @@
 machine:
+  environment:
+    USER: p08tf1X
+    PASS: p@ssw0Rd
+    LOG_TOKEN: 8397b752-123f-4d10-95b1-76f267102a7b
+    HOSTNAME: post-office.htmlgraphic.com
   services:
     - docker
 dependencies:
@@ -7,7 +12,8 @@ dependencies:
 test:
   override:
     # test postfix
-    - docker run -d -p 25:25 --name postfix -e USER=p08tf1X -e PASS=p@ssw0Rd -e LOG_TOKEN=8397b752-123f-4d10-95b1-76f267102a7b -e HOSTNAME=post-office.htmlgraphic.com postfix; sleep 20
-    - docker logs postfix | grep "p08tf1X:p@ssw0Rd"
+    - docker run -d -p 25:25 --name postfix -e USER=$USER -e PASS=$PASS -e LOG_TOKEN=$LOG_TOKEN -e HOSTNAME=$HOSTNAME postfix; sleep 20
+    # test correct env conf
+    - docker logs postfix | grep "$USER:$PASS"
     # test logentries sample key
-    - docker logs postfix | grep "8397b752-123f-4d10-95b1-76f267102a7b"
+    - docker logs postfix | grep "$LOG_TOKEN"
