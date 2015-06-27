@@ -1,7 +1,7 @@
 # Build a container via the command "make build"
 # By Jason Gegere <jason@htmlgraphic.com>
 
-VERSION 			= 1.1.1
+VERSION 			= 1.1.2
 NAME 				= postfix
 IMAGE_REPO 	= htmlgraphic
 HOST 				= post-office.htmlgraphic.com
