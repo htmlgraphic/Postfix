@@ -1,11 +1,11 @@
 # Build a container via the command "make build"
 # By Jason Gegere <jason@htmlgraphic.com>
 
-VERSION = 1.1.0
-NAME = postfix
-IMAGE_REPO = htmlgraphic
-HOSTNAME = post-office.htmlgraphic.com
-IMAGE_NAME = $(IMAGE_REPO)/$(NAME)
+VERSION 			= 1.1.0
+NAME 				= postfix
+IMAGE_REPO 	= htmlgraphic
+HOST 				= post-office.htmlgraphic.com
+IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
 
 all:: help
 
@@ -33,7 +33,7 @@ push:
 
 run:
 	@echo "Run $(NAME)..."
-	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=username -e PASS=password -e HOSTNAME=$(HOSTNAME) $(IMAGE_NAME):$(VERSION)
+	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=username -e PASS=password -e HOST=$(HOST) $(IMAGE_NAME):$(VERSION)
 
 start:
 	@echo "Starting $(NAME)..."

@@ -8,8 +8,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
  postfix && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-# POSTFIX
-
 # Copy files / scripts to build application
 RUN mkdir -p /opt
 COPY ./app /opt/app
