@@ -11,21 +11,22 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
 # POSTFIX
 
 # Copy files / scripts to build application
-ADD ./tests /opt
-ADD ./app /opt
-RUN chmod 755 /opt/*
+RUN mkdir -p /opt
+COPY ./app /opt/app
+COPY ./tests /opt/tests
+RUN chmod -R 755 /opt/*
 
-RUN debconf-set-selections /opt/preseed.txt
+RUN debconf-set-selections /opt/app/preseed.txt
 
 ADD virtual /etc/postfix/virtual
 RUN sudo postmap /etc/postfix/virtual
 
 
 # SUPERVISOR
-RUN mkdir -p /var/log/supervisor && cp /opt/supervisord.conf /etc/supervisor/conf.d/
+RUN mkdir -p /var/log/supervisor && cp /opt/app/supervisord.conf /etc/supervisor/conf.d/
 
 
 # Note that EXPOSE only works for inter-container links. It doesn't make ports accessible from the host. To expose port(s) to the host, at runtime, use the -p flag.
 EXPOSE 25
 
-CMD ["/bin/bash", "/opt/run.sh"]
+CMD ["/opt/app/run.sh"]

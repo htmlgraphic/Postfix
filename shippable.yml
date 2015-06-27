@@ -9,7 +9,7 @@ script:
   - bash app/run.sh &
   - sleep 20
   - /usr/sbin/postconf -n
-  - bash tests/build_tests.sh
+  - bash ./tests/build_tests.sh
 
 cache: true
 
