@@ -35,6 +35,10 @@ cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
 # mailname should match the system hostname
 cp /etc/hostname /etc/mailname
 
+# Map root user to an actual email
+mv /opt/app/virtual /etc/postfix/virtual && sudo postmap /etc/postfix/virtual
+
+
 # These are required when postfix runs chrooted
 #
 [[ -z $(ls /var/spool/postfix/etc) ]] && {

@@ -16,9 +16,6 @@ RUN chmod -R 755 /opt/*
 
 RUN debconf-set-selections /opt/app/preseed.txt
 
-ADD virtual /etc/postfix/virtual
-RUN sudo postmap /etc/postfix/virtual
-
 
 # SUPERVISOR
 RUN mkdir -p /var/log/supervisor && cp /opt/app/supervisord.conf /etc/supervisor/conf.d/
