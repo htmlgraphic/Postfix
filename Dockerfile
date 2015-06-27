@@ -13,7 +13,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
 # Copy files / scripts to build application
 ADD ./tests /opt
 ADD ./app /opt
-RUN chmod 755 /opt/* && cp /etc/hostname /etc/mailname
+RUN chmod 755 /opt/*
 
 RUN debconf-set-selections /opt/preseed.txt
 
