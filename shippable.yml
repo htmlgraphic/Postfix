@@ -1,17 +1,21 @@
 language: python
 
-build_image: htmlgraphic/postfix
-
 env:
   - USER=p08tf1X PASS=p@ssw0Rd
 
+
 script:
-  - bash app/run.sh &
+  - bash ./app/run.sh &
   - sleep 20
   - /usr/sbin/postconf -n
   - bash ./tests/build_tests.sh
 
-cache: true
+
+branches:
+  only:
+  - master
+  - develop
+
 
 notifications:
   email:
@@ -19,8 +23,3 @@ notifications:
       - jason@htmlgraphic.com
     on_success: change
     on_failure: always
-
-branches:
-  only:
-  - master
-  - develop
