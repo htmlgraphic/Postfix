@@ -4,8 +4,8 @@
 VERSION 			= 1.1.2
 NAME 				= postfix
 IMAGE_REPO 	= htmlgraphic
-HOST 				= post-office.htmlgraphic.com
 IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
+HOST 				= post-office.htmlgraphic.com
 
 all:: help
 
@@ -14,8 +14,8 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "     make build		- Build image $(NAME)"
-	@echo "     make push		- Push $(IMAGE_NAME) to public docker repo"
+	@echo "     make build		- Build image $(IMAGE_NAME):$(VERSION)"
+	@echo "     make push		- Push $(IMAGE_NAME):$(VERSION) to public docker repo"
 	@echo "     make run		- Run $(NAME) container"
 	@echo "     make start		- Start the EXISTING $(NAME) container"
 	@echo "     make stop		- Stop $(NAME) container"
@@ -25,7 +25,7 @@ help:
 	@echo "     make logs		- Tail logs on running instance"
 
 build:
-	@echo "Build $(NAME)..."
+	@echo "Build image $(IMAGE_NAME):$(VERSION)"
 	docker build --rm --no-cache -t $(IMAGE_NAME):$(VERSION) .
 
 push:
