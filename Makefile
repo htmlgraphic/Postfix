@@ -16,9 +16,9 @@ help:
 	@echo ""
 	@echo "     make build		- Build image $(IMAGE_NAME):$(VERSION)"
 	@echo "     make push		- Push $(IMAGE_NAME):$(VERSION) to public docker repo"
-	@echo "     make run		- Run $(NAME) container"
+	@echo "     make run		- Run docker-compose and create local development environment"
 	@echo "     make start		- Start the EXISTING $(NAME) container"
-	@echo "     make stop		- Stop $(NAME) container"
+	@echo "     make stop		- Stop local environment build"
 	@echo "     make restart	- Stop and start $(NAME) container"
 	@echo "     make rm		- Stop and remove $(NAME) container"
 	@echo "     make state		- View state $(NAME) container"
@@ -34,7 +34,7 @@ push:
 
 run:
 	@echo "Run $(NAME)..."
-	docker run -d --restart=always -p 25:25 --name $(NAME) -e LOG_TOKEN=$(LOG_ENTRIES_TOKEN) -e USER=username -e PASS=password -e HOST=$(HOST) $(IMAGE_NAME):$(VERSION)
+	docker-compose up -d
 
 start:
 	@echo "Starting $(NAME)..."
@@ -42,7 +42,7 @@ start:
 
 stop:
 	@echo "Stopping $(NAME)..."
-	docker stop $(NAME) > /dev/null
+	docker-compose stop
 
 restart: stop start
 
