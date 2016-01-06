@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-StartPostfix ()
+OutputLog ()
 {
 	echo "=> Adding environmental variables:"
 	echo "=> SMTP: $USER:$PASS"
@@ -19,7 +19,7 @@ EOF
 
 postconf -e "myhostname = $(cat /etc/hostname)"
 postconf -e "mydestination = $myhostname localhost.$mydomain localhost"
-postconf -e "mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.17.0.0/18 50.28.0.151 54.225.164.191 67.53.191.246 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
+postconf -e "mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.17.0.0/18 50.28.0.151 54.225.164.191 67.53.191.246 184.60.94.26 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
 postconf -e "smtpd_banner = $HOST ESMTP $mail_name (Ubuntu)"
 postconf -e "smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination permit"
 postconf -e "virtual_alias_maps = hash:/etc/postfix/virtual"
@@ -55,9 +55,9 @@ mv /opt/app/virtual /etc/postfix/virtual && sudo postmap /etc/postfix/virtual
 	chmod g+s /usr/sbin/post{drop,queue}
 
 
-# Display Postfix credentials for build testing
+# Display system credentials for build testing
 #
-StartPostfix
+OutputLog
 
 
 # Spin everything up
