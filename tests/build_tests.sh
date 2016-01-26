@@ -96,6 +96,14 @@ testPostfixMyNetworks7()
 	echo -e '\n'
 }
 
+testPostfixMyNetworks7()
+{
+	echo 'Allow 104.236.9.145 to send email.'
+	test=$(/usr/sbin/postconf mynetworks | grep '104.236.9.145' | wc -l)
+	assertEquals $test 1
+	echo -e '\n'
+}
+
 
 
 . shunit2-2.1.6/src/shunit2
