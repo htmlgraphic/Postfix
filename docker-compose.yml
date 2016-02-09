@@ -1,4 +1,4 @@
-apache:
+postfix:
   image: htmlgraphic/postfix:latest
   container_name: postfix
   ports:
