@@ -1,11 +1,11 @@
 machine:
+  services:
+    - docker
   environment:
     USER: p08tf1X
     PASS: p@ssw0Rd
-    LOG_TOKEN: 8397b752-123f-4d10-95b1-76f267102a7b
+    LOG_TOKEN: $LOG_TOKEN
     HOSTNAME: post-office.htmlgraphic.com
-  services:
-    - docker
 dependencies:
   override:
     - docker build -t postfix .
