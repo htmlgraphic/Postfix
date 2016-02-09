@@ -7,7 +7,7 @@ postfix:
   environment:
     - DOMAIN=htmlgraphic.com
     - HOST=post-office
-    - LOG_TOKEN=$(LOG_ENTRIES_TOKEN)
+    - LOG_TOKEN=$LOG_ENTRIES_TOKEN
     - NODE_ENVIRONMENT=production
     - PASS=password
     - USER=username
