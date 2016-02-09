@@ -1,0 +1,11 @@
+postfix:
+  image: htmlgraphic/postfix:latest
+  ports:
+    - "25:25"
+  restart: always
+  environment:
+    - NODE_ENVIRONMENT=production
+    - LOG_TOKEN=$(LOG_ENTRIES_TOKEN)
+    - USER=username
+    - PASS=password
+    - HOST=$(HOST)
