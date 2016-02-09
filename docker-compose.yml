@@ -5,8 +5,9 @@ postfix:
     - "25:25"
   restart: always
   environment:
-    - NODE_ENVIRONMENT=production
+    - DOMAIN=htmlgraphic.com
+    - HOST=post-office
     - LOG_TOKEN=$(LOG_ENTRIES_TOKEN)
-    - USER=username
+    - NODE_ENVIRONMENT=production
     - PASS=password
-    - HOST=$(HOST)
+    - USER=username

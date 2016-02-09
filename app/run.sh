@@ -17,10 +17,23 @@ cat <<EOF > /etc/rsyslog.d/logentries.conf
 EOF
 
 
-postconf -e "myhostname = $(cat /etc/hostname)"
-postconf -e "mydestination = $myhostname localhost.$mydomain localhost"
+# Postfix is not using /etc/resolv.conf is because it is running inside a chroot jail, needs its own copy.
+cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
+
+# mailname should match the system hostname
+echo $HOSTNAME.$DOMAIN > /etc/hostname
+cp /etc/hostname /etc/mailname
+
+# Map root user to an actual email
+mv /opt/app/virtual /etc/postfix/virtual && sudo postmap /etc/postfix/virtual
+
+
+postconf -e "myhostname = $HOST.$DOMAIN"
+postconf -e "append_dot_mydomain = yes"
+postconf -e "mydomain = $DOMAIN"
+postconf -e "mydestination = localhost.$DOMAIN localhost"
 postconf -e "mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.17.0.0/18 104.236.9.145 50.28.0.151 54.225.164.191 67.53.191.246 184.60.94.26 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
-postconf -e "smtpd_banner = $HOST ESMTP $mail_name (Ubuntu)"
+postconf -e "smtpd_banner = $(cat /etc/hostname) ESMTP"
 postconf -e "smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination permit"
 postconf -e "virtual_alias_maps = hash:/etc/postfix/virtual"
 postconf -e "smtp_sasl_auth_enable = yes"
@@ -29,14 +42,6 @@ postconf -e "smtp_sasl_security_options = noanonymous"
 postconf -e "smtp_tls_security_level = encrypt"
 postconf -e "header_size_limit = 4096000"
 postconf -e "relayhost = [smtp.sendgrid.net]:587"
-
-# Postfix is not using /etc/resolv.conf is because it is running inside a chroot jail, needs its own copy.
-cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
-# mailname should match the system hostname
-cp /etc/hostname /etc/mailname
-
-# Map root user to an actual email
-mv /opt/app/virtual /etc/postfix/virtual && sudo postmap /etc/postfix/virtual
 
 
 # These are required when postfix runs chrooted

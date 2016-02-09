@@ -5,7 +5,8 @@ VERSION 			= 1.1.3
 NAME				= postfix
 IMAGE_REPO 	= htmlgraphic
 IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
-HOST				= post-office.htmlgraphic.com
+HOST				= post-office
+DOMAIN			= htmlgraphic.com
 
 all:: help
 
