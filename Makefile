@@ -2,10 +2,10 @@
 # By Jason Gegere <jason@htmlgraphic.com>
 
 VERSION 			= 1.1.3
-NAME 				= postfix
+NAME				= postfix
 IMAGE_REPO 	= htmlgraphic
 IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
-HOST 				= post-office.htmlgraphic.com
+HOST				= post-office.htmlgraphic.com
 
 all:: help
 
@@ -14,15 +14,15 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "     make build		- Build image $(IMAGE_NAME):$(VERSION)"
-	@echo "     make push		- Push $(IMAGE_NAME):$(VERSION) to public docker repo"
-	@echo "     make run		- Run docker-compose and create local development environment"
-	@echo "     make start		- Start the EXISTING $(NAME) container"
-	@echo "     make stop		- Stop local environment build"
-	@echo "     make restart	- Stop and start $(NAME) container"
-	@echo "     make rm		- Stop and remove $(NAME) container"
-	@echo "     make state		- View state $(NAME) container"
-	@echo "     make logs		- Tail logs on running instance"
+	@echo "	make build	- Build image $(IMAGE_NAME):$(VERSION)"
+	@echo "	make push	- Push $(IMAGE_NAME):$(VERSION) to public docker repo"
+	@echo "	make run	- Run docker-compose and create local development environment"
+	@echo "	make start	- Start the EXISTING $(NAME) container"
+	@echo "	make stop	- Stop local environment build"
+	@echo "	make restart	- Stop and start $(NAME) container"
+	@echo "	make rm		- Stop and remove $(NAME) container"
+	@echo "	make state	- View state $(NAME) container"
+	@echo "	make logs	- Tail logs on running instance"
 
 build:
 	@echo "Build image $(IMAGE_NAME):$(VERSION)"
