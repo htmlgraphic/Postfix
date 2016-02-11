@@ -3,6 +3,7 @@ postfix:
   ports:
     - "25:25"
   restart: always
+  autoredeploy: true
   deployment_strategy: high_availability
   environment:
     - DOMAIN=htmlgraphic.com
@@ -13,3 +14,4 @@ postfix:
     - USER=username
   tags:
     - prod
+  target_num_containers: 3
