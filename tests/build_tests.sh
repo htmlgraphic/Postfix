@@ -80,14 +80,6 @@ testPostfixMyNetworks6()
 	echo -e '\n'
 }
 
-testPostfixMyNetworks6()
-{
-	echo 'Allow 67.53.191.246 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '67.53.191.246' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
 testPostfixMyNetworks7()
 {
 	echo 'Allow 184.60.94.26 to send email.'
