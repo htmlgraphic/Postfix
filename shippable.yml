@@ -1,25 +1,34 @@
-language: python
-
 env:
-  - USER=p08tf1X PASS=p@ssw0Rd LOG_TOKEN=$LOG_TOKEN
+  - SASL_USER=p08tf1X SASL_PASS=p@ssw0Rd LOG_TOKEN=$LOG_TOKEN SMTP_ALLOW_IP="104.236.9.145 50.28.0.151 54.225.164.191 184.60.94.26 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
 
-
-script:
-  - bash ./app/run.sh &
-  - sleep 20
-  - /usr/sbin/postconf -n
-  - bash ./tests/build_tests.sh
-
+build:
+  pre_ci:
+    - docker build -t htmlgraphic/postfix:latest .
+  pre_ci_boot:
+    image_name: htmlgraphic/postfix
+    image_tag: latest
+    pull: false
+  ci:
+    - "bash app/run.sh &"
+    - "/usr/sbin/postconf -n"
+    - "bash tests/build_tests.sh"
+  post_ci:
+    - sudo apt-get update && apt-get -y install python-pip
+    - sudo pip install -U docker-compose
+    - docker-compose -f docker-compose.yml up -d
+    - docker ps -a
 
 branches:
   only:
   - master
   - develop
 
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      recipients:
+        - jason+github@htmlgraphic.com
+      on_success: change
+      on_failure: always
 
-notifications:
-  email:
-    recipients:
-      - jason@htmlgraphic.com
-    on_success: change
-    on_failure: always
