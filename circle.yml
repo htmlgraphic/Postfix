@@ -1,19 +1,26 @@
 machine:
   services:
     - docker
+
   environment:
     DOMAIN: htmlgraphic.com
     HOST: post-office
     LOG_TOKEN: $LOG_ENTRIES_TOKEN
     PASS: p@ssw0Rd
     USER: p08tf1X
+
 dependencies:
   override:
-    - docker build -t postfix .
+    - docker info
+    - docker build -t htmlgraphic/postfix:latest .
+
 test:
   override:
-    # test postfix
-    - docker run -d -p 25:25 --name postfix -e USER=$USER -e PASS=$PASS -e LOG_TOKEN=$LOG_ENTRIES_TOKEN postfix; sleep 20
+    # stop MySQL from running on CircleCI
+    - sudo service mysql stop
+
+    # spin up containers simulating a PRODCUTION build
+    - docker-compose -f docker-compose.yml up -d; sleep 20
     # test correct env conf
     - docker logs postfix | grep "$USER:$PASS"
     # test logentries sample key
