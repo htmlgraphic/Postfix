@@ -4,7 +4,7 @@
 OutputLog ()
 {
 	echo "=> Adding environmental variables:"
-	echo "=> SMTP: $USER:$PASS"
+	echo "=> SMTP: $SASL_USER:$SASL_PASS"
 	echo "=> Log Key: $LOG_TOKEN"
 }
 
@@ -37,7 +37,7 @@ postconf -e "smtpd_banner = $(cat /etc/hostname) ESMTP"
 postconf -e "smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination permit"
 postconf -e "virtual_alias_maps = hash:/etc/postfix/virtual"
 postconf -e "smtp_sasl_auth_enable = yes"
-postconf -e "smtp_sasl_password_maps = static:$USER:$PASS"
+postconf -e "smtp_sasl_password_maps = static:$SASL_USER:$SASL_PASS"
 postconf -e "smtp_sasl_security_options = noanonymous"
 postconf -e "smtp_tls_security_level = encrypt"
 postconf -e "header_size_limit = 4096000"

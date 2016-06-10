@@ -2,13 +2,6 @@ machine:
   services:
     - docker
 
-  environment:
-    DOMAIN: htmlgraphic.com
-    HOST: post-office
-    LOG_TOKEN: $LOG_ENTRIES_TOKEN
-    PASS: p@ssw0Rd
-    USER: p08tf1X
-
 dependencies:
   override:
     - docker info
@@ -22,6 +15,6 @@ test:
     # spin up containers simulating a PRODCUTION build
     - docker-compose -f docker-compose.yml up -d; sleep 20
     # test correct env conf
-    - docker logs postfix | grep "$USER:$PASS"
+    - docker logs postfix | grep "$SASL_USER:$SASL_PASS"
     # test logentries sample key
     - docker logs postfix | grep "$LOG_ENTRIES_TOKEN"
