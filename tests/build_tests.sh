@@ -1,26 +1,35 @@
 #!/usr/bin/env bash
+. /etc/environment
 
-curl -L "https://shunit2.googlecode.com/files/shunit2-2.1.6.tgz" | tar zx
-
-	#### Extra breathing room
-	echo -e '\n'
+#### Extra breathing room
+echo -e '\n'
 
 testPostfixUsername()
 {
-	echo 'Testing Postfix username.'
-	test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep 'p08tf1X' | wc -l)
-	assertEquals $test 1
+	test=0
+	echo 'Testing Postfix username, currently set to "'${SASL_USER}'"'
+	if [ ! -z "${SASL_USER}" ]; then
+		test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep "${SASL_USER}" | wc -l)
+	else
+		echo 'ENV $SASL_USER is not set';
+	fi
+	assertEquals 1 $test
 	echo -e '\n'
 }
 
 
 testPostfixPassword()
 {
-	echo 'Testing Postfix password.'
-	test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep 'p@ssw0Rd' | wc -l)
-	assertEquals $test 1
+	echo 'Testing Postfix password, currently set to "'${SASL_PASS}'"'
+	if [ ! -z "${SASL_PASS}" ]; then
+		test=$(/usr/sbin/postconf smtp_sasl_password_maps | grep "${SASL_PASS}" | wc -l)
+	else
+		echo 'ENV $SASL_PASS is not set';
+	fi
+	assertEquals 1 $test
 	echo -e '\n'
 }
+
 
 
 testPostfixRelay()
@@ -58,4 +67,4 @@ testPostfixMyNetworks3()
 
 
 
-. shunit2-2.1.6/src/shunit2
+. /opt/tests/shunit2-2.1.6/src/shunit2
