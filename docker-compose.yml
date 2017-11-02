@@ -7,10 +7,6 @@ services:
       - "25:25"
     restart: always
     environment:
-      - DOMAIN=htmlgraphic.com
-      - HOST=post-office
       - LOG_TOKEN=$LOG_ENTRIES_TOKEN
-      - NODE_ENVIRONMENT=production
-      - SASL_PASS=password
-      - SASL_USER=username
-      - SMTP_ALLOW_IP='192.168.0.1 192.168.0.2 192.168.0.3'
+    env_file:
+      - .env
