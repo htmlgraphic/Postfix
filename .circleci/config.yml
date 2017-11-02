@@ -42,6 +42,15 @@ jobs:
           command: |
             docker logs postfix > ~/postfix/logs/container-build/log_output-LIVE.txt
 
+      - run:
+          name: Global Environment Vars
+          command: |
+            docker exec postfix /bin/bash -c "export"
+
+      - run:
+          name: DEV Build Tests
+          command: |
+            docker exec postfix /bin/bash /opt/tests/build_tests.sh
 
 
       - store_artifacts:

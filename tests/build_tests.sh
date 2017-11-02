@@ -34,64 +34,24 @@ testPostfixRelay()
 
 testPostfixMyNetworks1()
 {
-	echo 'Allow 172.17.0.0/18 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '172.17.0.0/18' | wc -l)
+	echo 'Allow 192.168.0.1 to send email.'
+	test=$(/usr/sbin/postconf mynetworks | grep '192.168.0.1' | wc -l)
 	assertEquals $test 1
 	echo -e '\n'
 }
 
 testPostfixMyNetworks2()
 {
-	echo 'Allow 50.28.0.151 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '50.28.0.151' | wc -l)
+	echo 'Allow 192.168.0.2 to send email.'
+	test=$(/usr/sbin/postconf mynetworks | grep '192.168.0.2' | wc -l)
 	assertEquals $test 1
 	echo -e '\n'
 }
 
 testPostfixMyNetworks3()
 {
-	echo 'Allow 54.225.164.19 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '54.225.164.191' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
-testPostfixMyNetworks4()
-{
-	echo 'Allow 104.236.40.133 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '104.236.40.133' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
-testPostfixMyNetworks5()
-{
-	echo 'Allow 107.170.0.0/18 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '107.170.0.0/18' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
-testPostfixMyNetworks6()
-{
-	echo 'Allow 10.7.0.0/16 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '10.7.0.0/16' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
-testPostfixMyNetworks7()
-{
-	echo 'Allow 184.60.94.26 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '184.60.94.26' | wc -l)
-	assertEquals $test 1
-	echo -e '\n'
-}
-
-testPostfixMyNetworks7()
-{
-	echo 'Allow 104.236.9.145 to send email.'
-	test=$(/usr/sbin/postconf mynetworks | grep '104.236.9.145' | wc -l)
+	echo 'Allow 192.168.0.3 to send email.'
+	test=$(/usr/sbin/postconf mynetworks | grep '192.168.0.3' | wc -l)
 	assertEquals $test 1
 	echo -e '\n'
 }
