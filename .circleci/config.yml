@@ -30,7 +30,7 @@ jobs:
             docker ps -a
             sleep 10
 
-      - run: mkdir -p ~/postfix/logs/container-build
+      - run: mkdir -p ~/logs/container-build
 
       - run:
           name: LIVE Build Tests
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Container Logs
           command: |
-            docker logs postfix > ~/postfix/logs/container-build/log_output-LIVE.txt
+            docker logs postfix > ~/logs/container-build/log_output-LIVE.txt
 
       - run:
           name: Global Environment Vars
@@ -54,8 +54,8 @@ jobs:
 
 
       - store_artifacts:
-          path: ~/postfix/logs/container-build
+          path: ~/logs/container-build
           destination: raw-test-output
 
       - store_test_results:
-          path: ~/postfix/logs/container-build
+          path: ~/logs/container-build

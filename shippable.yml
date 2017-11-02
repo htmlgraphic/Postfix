@@ -3,25 +3,14 @@ env:
 
 build:
   pre_ci:
-    - docker build -t htmlgraphic/postfix:latest .
-  pre_ci_boot:
-    image_name: htmlgraphic/postfix
-    image_tag: latest
-    pull: false
+    - make build
   ci:
     - "bash app/run.sh &"
     - "/usr/sbin/postconf -n"
+    - sleep 5
     - "bash tests/build_tests.sh"
-  post_ci:
-    - sudo apt-get update && apt-get -y install python-pip
-    - sudo pip install -U docker-compose
-    - docker-compose -f docker-compose.yml up -d
-    - docker ps -a
-
-branches:
-  only:
-  - master
-  - develop
+  on_failure:
+    - docker logs postfix
 
 integrations:
   notifications:
@@ -31,4 +20,3 @@ integrations:
         - jason+github@htmlgraphic.com
       on_success: change
       on_failure: always
-
