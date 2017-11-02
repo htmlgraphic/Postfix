@@ -1,14 +1,16 @@
-postfix:
-  image: htmlgraphic/postfix:latest
-  container_name: postfix
-  ports:
-    - "25:25"
-  restart: always
-  environment:
-    - DOMAIN=htmlgraphic.com
-    - HOST=post-office
-    - LOG_TOKEN=$LOG_ENTRIES_TOKEN
-    - NODE_ENVIRONMENT=production
-    - SASL_PASS=password
-    - SASL_USER=username
-    - SMTP_ALLOW_IP="104.236.9.145 50.28.0.151 54.225.164.191 184.60.94.26 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
+version: "3"
+services:
+  postfix:
+    image: htmlgraphic/postfix:latest
+    container_name: postfix
+    ports:
+      - "25:25"
+    restart: always
+    environment:
+      - DOMAIN=htmlgraphic.com
+      - HOST=post-office
+      - LOG_TOKEN=$LOG_ENTRIES_TOKEN
+      - NODE_ENVIRONMENT=production
+      - SASL_PASS=password
+      - SASL_USER=username
+      - SMTP_ALLOW_IP=192.168.0.1 192.168.0.2 192.168.0.3

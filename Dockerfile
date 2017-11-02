@@ -1,5 +1,7 @@
 FROM htmlgraphic/base
 MAINTAINER Jason Gegere <jason@htmlgraphic.com>
+ARG VCS_REF
+ARG BUILD_DATE
 
 # Install packages then remove cache package list information
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \

@@ -1,7 +1,7 @@
 # Build a container via the command "make build"
 # By Jason Gegere <jason@htmlgraphic.com>
 
-VERSION 			= 1.1.4
+VERSION 		= 1.1.5
 NAME				= postfix
 IMAGE_REPO 	= htmlgraphic
 IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
@@ -27,7 +27,10 @@ help:
 
 build:
 	@echo "Build image $(IMAGE_NAME):$(VERSION)"
-	docker build --rm --no-cache -t $(IMAGE_NAME):$(VERSION) .
+	docker build --rm --no-cache \
+        --build-arg VCS_REF=`git rev-parse --short HEAD` \
+        --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+        --rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):$(VERSION) .
 
 push:
 	@echo "note: If the repository is set as an automatted build you will NOT be able to push"
@@ -35,7 +38,7 @@ push:
 
 run:
 	@echo "Run $(NAME)..."
-	docker-compose up -d
+	docker-compose -f docker-compose.yml up -d
 
 start:
 	@echo "Starting $(NAME)..."

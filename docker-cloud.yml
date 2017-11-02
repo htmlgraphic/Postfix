@@ -12,7 +12,7 @@ postfix:
     - NODE_ENVIRONMENT=production
     - SASL_PASS=password
     - SASL_USER=username
-    - SMTP_ALLOW_IP="104.236.9.145 50.28.0.151 54.225.164.191 184.60.94.26 104.236.40.133 107.170.0.0/18 10.7.0.0/16"
+    - SMTP_ALLOW_IP=192.168.0.1 192.168.0.2 192.168.0.3
   tags:
-    - prod
+    - production
   target_num_containers: 3

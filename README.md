@@ -1,21 +1,23 @@
-##Quick Start
+## Quick Start
 ```bash
 	$ git clone https://github.com/htmlgraphic/Postfix.git && cd Postfix
 	$ make
 	$ make build
 ```
 
-##Postfix Docker
+## Postfix Docker
 
-Postfix is a very nice mail courier service, I enjoy using. This repo will give you a turn key, fully functional build of a Docker container for use in production or your dev environment.
+Postfix is a very nice mail courier service, enjoyed by many. This repo will give you a turn key, fully functional build of a Docker container for use in production or your dev environment.
+
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)
 
 ---
 
 If you found this repo you are probably looking into Docker or already have knowledge as to what Docker can help you with. In this repo you will find a number of complete Dockerfile builds used in **development** and **production** environments. Listed below are the types of systems available and an explanation of each file.
 
-###Repo Breakdown
+### Repo Breakdown
 
-#####Test Driven Development
+##### Test Driven Development
 
 **[CircleCI](https://circleci.com/gh/htmlgraphic/Postfix)** - Test the Dockerfile process, can the container be built the correctly? Verify the build process with a number of tests. Currently with this service no code can be tested on the running container. Data can be echo and available grepping the output via `docker logs | grep value`
 
@@ -27,7 +29,7 @@ If you found this repo you are probably looking into Docker or already have know
 [![Build Status](https://api.shippable.com/projects/54986113d46935d5fbc0d2ec/badge?branchName=master)](https://app.shippable.com/projects/54986113d46935d5fbc0d2ec/builds/latest) 
 
 
-####Postfix Container - Build Breakdown
+#### Postfix Container - Build Breakdown
 * **app/preseed.txt** - Params used on initial Postfix setup
 * **app/run.sh** - Setup apache, move around conf files, start process on container
 * **app/supervisord.conf** - Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems
