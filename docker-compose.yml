@@ -13,4 +13,4 @@ services:
       - NODE_ENVIRONMENT=production
       - SASL_PASS=password
       - SASL_USER=username
-      - SMTP_ALLOW_IP=192.168.0.1 192.168.0.2 192.168.0.3
+      - SMTP_ALLOW_IP='192.168.0.1 192.168.0.2 192.168.0.3'
