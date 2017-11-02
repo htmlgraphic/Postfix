@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     machine: true
-    working_directory: ~/postfix
+    working_directory: ~/logs
 
     steps:
       - checkout
@@ -18,7 +18,7 @@ jobs:
           name: Build Postfix Docker image
           command: |
             docker info
-            docker build -t htmlgraphic/postfix:latest .
+            make build
 
 
 # LIVE Build
@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Start LIVE Container
           command: |
-            docker-compose -f docker-compose.yml up -d
+            make run
             docker ps -a
             sleep 10
 

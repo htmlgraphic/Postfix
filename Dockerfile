@@ -20,7 +20,8 @@ RUN debconf-set-selections /opt/app/preseed.txt
 
 # SUPERVISOR
 RUN chmod -R 755 /opt/* && \
-		mkdir -p /var/log/supervisor && cp /opt/app/supervisord.conf /etc/supervisor/conf.d/
+		mkdir -p /var/log/supervisor && \
+		cp /opt/app/supervisord.conf /etc/supervisor/conf.d/
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
