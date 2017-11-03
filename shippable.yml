@@ -4,6 +4,10 @@ env:
 build:
   pre_ci:
     - make build
+  pre_ci_boot:
+    image_name: htmlgraphic/postfix
+    image_tag: latest
+    pull: false
   ci:
     - "bash app/run.sh &"
     - "/usr/sbin/postconf -n"

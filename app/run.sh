@@ -17,7 +17,7 @@ cat <<EOF > /etc/rsyslog.d/logentries.conf
 EOF
 
 
-# Postfix is not using /etc/resolv.conf is because it is running inside a chroot jail, needs its own copy.
+# Postfix is not using /etc/resolv.conf, it is running inside a chroot jail, needs its own copy.
 cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
 
 # mailname should match the system hostname
@@ -25,7 +25,7 @@ echo $HOSTNAME.$DOMAIN > /etc/hostname
 cp /etc/hostname /etc/mailname
 
 # Map root user to an actual email
-mv /opt/app/virtual /etc/postfix/virtual && sudo postmap /etc/postfix/virtual
+mv /opt/app/virtual /etc/postfix/virtual && postmap /etc/postfix/virtual
 
 
 postconf -e "myhostname = $HOST.$DOMAIN"
