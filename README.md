@@ -9,8 +9,6 @@
 
 Postfix is a very nice mail courier service, enjoyed by many. This repo will give you a turn key, fully functional build of a Docker container for use in production or your dev environment.
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)
-
 ---
 
 If you found this repo you are probably looking into Docker or already have knowledge as to what Docker can help you with. In this repo you will find a number of complete Dockerfile builds used in **development** and **production** environments. Listed below are the types of systems available and an explanation of each file.
@@ -36,6 +34,7 @@ If you found this repo you are probably looking into Docker or already have know
 * **app/virtual** - Map `root` to an actual email
 * **tests/build_tests.sh** - Build processes
 * **.dockerignore** - Files that should be ignored during the build process - [best practices](https://docs.docker.com/articles/dockerfile_best-practices/#use-a-dockerignore-file)
+* **.env.example** - Useful environment variables 
 * **circle.yml** - CircleCI configuration
 * **Dockerfile** - Uses a basefile build to help speed up the docker container build process
 * **Makefile** - A helpful file used to streamline the creation of containers
