@@ -1,3 +1,9 @@
+## Postfix Docker
+
+Postfix is a very nice mail courier service, enjoyed by many. This repo will give you a turn key, fully functional build of a Docker container for use in production or your dev environment.
+
+---
+
 ## Quick Start
 ```bash
 	$ git clone https://github.com/htmlgraphic/Postfix.git && cd Postfix
@@ -5,40 +11,46 @@
 	$ make build
 ```
 
-## Postfix Docker
-
-Postfix is a very nice mail courier service, enjoyed by many. This repo will give you a turn key, fully functional build of a Docker container for use in production or your dev environment.
-
----
-
-If you found this repo you are probably looking into Docker or already have knowledge as to what Docker can help you with. In this repo you will find a number of complete Dockerfile builds used in **development** and **production** environments. Listed below are the types of systems available and an explanation of each file.
+___
 
 ### Repo Breakdown
 
 ##### Test Driven Development
 
-**[CircleCI](https://circleci.com/gh/htmlgraphic/Postfix)** - Test the Dockerfile process, can the container be built the correctly? Verify the build process with a number of tests. Currently with this service no code can be tested on the running container. Data can be echo and available grepping the output via `docker logs | grep value`
+**CircleCI** - Test the Dockerfile process, can the container be built the correctly? Verify the build process with a number of tests. Currently with this service no code can be tested on the running container. Data can be echo and available grepping the output via `docker logs | grep value`
 
 [![Circle CI](https://circleci.com/gh/htmlgraphic/Postfix/tree/master.svg?style=svg&circle-token=b99a13800c40caa2cc8bafa36258acccf038b8aa)](https://circleci.com/gh/htmlgraphic/Postfix/tree/master)
 
 
-**[Shippable](https://shippable.com)** - Run tests on the actual built container. These tests ensure the scripts have been setup properly and the service can start with parameters defined. If any test(s) fail the system should be reviewed closer.
+**Shippable** - Run tests on the actual built container. These tests ensure the scripts have been setup properly and the service can start with parameters defined. If any test(s) fail the system should be reviewed closer.
 
 [![Build Status](https://api.shippable.com/projects/54986113d46935d5fbc0d2ec/badge?branchName=master)](https://app.shippable.com/projects/54986113d46935d5fbc0d2ec/builds/latest) 
 
 
-#### Postfix Container - Build Breakdown
-* **app/preseed.txt** - Params used on initial Postfix setup
-* **app/run.sh** - Setup apache, move around conf files, start process on container
-* **app/supervisord.conf** - Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems
-* **app/virtual** - Map `root` to an actual email
-* **tests/build_tests.sh** - Build processes
-* **.dockerignore** - Files that should be ignored during the build process - [best practices](https://docs.docker.com/articles/dockerfile_best-practices/#use-a-dockerignore-file)
-* **.env.example** - Useful environment variables 
-* **circle.yml** - CircleCI configuration
-* **Dockerfile** - Uses a basefile build to help speed up the docker container build process
-* **Makefile** - A helpful file used to streamline the creation of containers
-* **shippable.yml** - Shippable configuration
+## Build Breakdown
+
+```shell
+Postfix
+├── app/                     # → App conf to manage application on container
+│   ├── preseed.txt   			 # → Params used on initial Postfix setup
+│   ├── run.sh            	 # → Setup apache, move around conf files, start process on container
+│   ├── supervisord.conf   	 # → Supervisor is a system which monitors and controls a number of processes
+│   ├── virtual   					 # → Map `root` to an actual email
+│   ├── run.sh               # → Setup apache, conf files, and start process on container
+│   ├── sample.conf          # → Located within `/data/apache2/sites-enabled` duplicate / modify to add domains
+│   └── supervisord          # → Supervisor is a system which monitors and controls a number of processes
+├── .env.example             # → Useful environment variables 
+├── .circleci/
+│   └── config.yml           # → CircleCI 2.0 Config
+├── docker-compose.yml       # → Production build
+├── Dockerfile               # → Uses a basefile build to help speed up the docker container build process
+├── Makefile                 # → Build command shortcuts
+├── shippable.yml            # → Shippable configuration
+└── tests/
+    ├── build_tests.sh       # → Build test processes
+    └── shunit2-2.1.7.tar.gz # → sh unit teesting
+```
+
 
 ---
 

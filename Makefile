@@ -1,12 +1,24 @@
 # Build a container via the command "make build"
 # By Jason Gegere <jason@htmlgraphic.com>
 
-VERSION 		= 1.1.5
-NAME				= postfix
+SHELL = /bin/sh
+
+include .env # .env file needs to created for this to work properly
+
+TAG 				= 1.1.6
+CONTAINER		= postfix
 IMAGE_REPO 	= htmlgraphic
-IMAGE_NAME 	= $(IMAGE_REPO)/$(NAME)
+IMAGE_NAME 	= $(IMAGE_REPO)/$(CONTAINER)
 HOST				= post-office
 DOMAIN			= htmlgraphic.com
+NODE_ENV=$(shell grep NODE_ENVIRONMENT .env | cut -d '=' -f 2-)
+
+ifeq ($(NODE_ENV),dev)
+	COMPOSE_FILE = docker-compose.local.yml
+else
+	COMPOSE_FILE = docker-compose.yml
+endif
+
 
 all:: help
 
@@ -15,48 +27,48 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "	make build	- Build image $(IMAGE_NAME):$(VERSION)"
-	@echo "	make push	- Push $(IMAGE_NAME):$(VERSION) to public docker repo"
+	@echo "	make build	- Build image $(IMAGE_NAME):$(TAG)"
+	@echo "	make push	- Push $(IMAGE_NAME):$(TAG) to public docker repo"
 	@echo "	make run	- Run docker-compose and create local development environment"
-	@echo "	make start	- Start the EXISTING $(NAME) container"
+	@echo "	make start	- Start the EXISTING $(CONTAINER) container"
 	@echo "	make stop	- Stop local environment build"
-	@echo "	make restart	- Stop and start $(NAME) container"
-	@echo "	make rm		- Stop and remove $(NAME) container"
-	@echo "	make state	- View state $(NAME) container"
+	@echo "	make restart	- Stop and start $(CONTAINER) container"
+	@echo "	make rm		- Stop and remove $(CONTAINER) container"
+	@echo "	make state	- View state $(CONTAINER) container"
 	@echo "	make logs	- Tail logs on running instance"
 
 build:
-	@echo "Build image $(IMAGE_NAME):$(VERSION)"
-	docker build --rm --no-cache \
+	@echo "Build image $(IMAGE_NAME):$(TAG)"
+	docker build --no-cache \
         --build-arg VCS_REF=`git rev-parse --short HEAD` \
         --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-        --rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):$(VERSION) .
+        --rm -t $(IMAGE_NAME):$(TAG) --rm -t $(IMAGE_NAME):latest .
 
 push:
 	@echo "note: If the repository is set as an automatted build you will NOT be able to push"
-	docker push $(IMAGE_NAME):$(VERSION)
+	docker push $(IMAGE_NAME):$(TAG)
 
 run:
-	@echo "Run $(NAME)..."
+	@echo "Run $(CONTAINER)..."
 	docker-compose -f docker-compose.yml up -d
 
 start:
-	@echo "Starting $(NAME)..."
-	docker start $(NAME) > /dev/null
+	@echo "Starting $(CONTAINER)..."
+	docker start $(CONTAINER) > /dev/null
 
 stop:
-	@echo "Stopping $(NAME)..."
+	@echo "Stopping $(CONTAINER)..."
 	docker-compose stop
 
 restart: stop start
 
 rm: stop
-	@echo "Removing $(NAME)..."
-	docker rm $(NAME) > /dev/null
+	@echo "Removing $(CONTAINER)..."
+	docker rm $(CONTAINER) > /dev/null
 
 state:
-	docker ps -a | grep $(NAME)
+	docker ps -a | grep $(CONTAINER)
 
 logs:
-	@echo "Build $(NAME)..."
-	docker logs -f $(NAME)
+	@echo "Build $(CONTAINER)..."
+	docker logs -f $(CONTAINER)
