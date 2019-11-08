@@ -67,4 +67,4 @@ testPostfixMyNetworks3()
 
 
 
-. /opt/tests/shunit2-2.1.6/src/shunit2
+. /opt/tests/shunit2-2.1.7/shunit2
