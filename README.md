@@ -6,9 +6,10 @@ Postfix is a very nice mail courier service, enjoyed by many. This repo will giv
 
 ## Quick Start
 ```bash
-	$ git clone https://github.com/htmlgraphic/Postfix.git && cd Postfix
-	$ make
-	$ make build
+	> git clone https://github.com/htmlgraphic/Postfix.git && cd Postfix
+	> cp .env.example .env
+	> make
+	> make build
 ```
 
 ___

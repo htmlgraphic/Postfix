@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Build a container via the command "make build"
 # By Jason Gegere <jason@htmlgraphic.com>
 
@@ -37,6 +39,13 @@ help:
 	@echo "	make state	- View state $(CONTAINER) container"
 	@echo "	make logs	- Tail logs on running instance"
 
+
+env:
+	@[ ! -f .env ] && echo "	.env file does not exist, copy env template \n" && cp .env.example .env || echo "	env file exists \n"
+	@echo "The following environment varibles exist:"
+	@echo $(shell sed 's/=.*//' .env)
+	@echo ''
+
 build:
 	@echo "Build image $(IMAGE_NAME):$(TAG)"
 	docker build --no-cache \
@@ -49,6 +58,8 @@ push:
 	docker push $(IMAGE_NAME):$(TAG)
 
 run:
+	@echo 'Setting environment varibles...'
+	@make env
 	@echo "Run $(CONTAINER)..."
 	docker-compose -f docker-compose.yml up -d
 
