@@ -1,7 +1,7 @@
-version: "3"
+version: '3'
 services:
   postfix:
-    image: htmlgraphic/postfix:latest
+    image: 'htmlgraphic/postfix:latest'
     container_name: postfix
     ports:
       - "25:25"

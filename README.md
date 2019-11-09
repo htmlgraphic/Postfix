@@ -42,8 +42,3 @@ Postfix
     └── shunit2-2.1.7.tar.gz # → sh unit teesting
 ```
 
-
----
-
-* To use [CircleCI](https://circleci.com/gh/htmlgraphic/Docker) review the `circle.yml` file.
-* To use [Shippable](http://shippable.com) review the `shippable.yml` file. This service will use a `circle.yml` file configuration but for the unique features provided by **Shippable** it is best to use the deadicated `shippable.yml` file. This service will fully test the creation of your container and can push the complete image to your private Docker repo if you desire.
