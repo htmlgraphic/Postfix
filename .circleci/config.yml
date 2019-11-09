@@ -10,14 +10,11 @@ jobs:
           name: Install Docker Compose
           command: |
             set -x
-            curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
+            sudo curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
       - run:
           name: Build Postfix Docker image
           command: |
-            docker info
+            cp .env.example .env
             make build
 
 
@@ -51,6 +48,11 @@ jobs:
           name: DEV Build Tests
           command: |
             docker exec postfix /bin/bash /opt/tests/build_tests.sh
+
+      - run:
+          name: Kill running containers
+          command: |
+            make stop && make rm
 
 
       - store_artifacts:
