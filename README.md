@@ -18,6 +18,17 @@ Postfix is a very nice mail courier service, enjoyed by many. This repo will giv
 
 ---
 
+## Google Cloud
+
+Use the following command with Google Compute. This will create a [virtual machine instance](https://cloud.google.com/sdk/gcloud/reference/beta/compute/instances/create-with-container) running [COS](https://cloud.google.com/container-optimized-os/) (Container Operating System).
+
+```bash
+	> gcloud compute instances create-with-container postfix0 --zone us-central1-b --machine-type f1-micro --container-env-file .env --container-image=docker.io/htmlgraphic/postfix:latest
+```
+
+---
+
+
 ## Build Breakdown
 
 ```shell
